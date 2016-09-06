@@ -2,6 +2,8 @@ package com.example.puristitchat;
 
 import android.support.v7.app.ActionBarActivity;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,9 +24,9 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
+		String regid = FirebaseInstanceId.getInstance().getToken();
 		
-		
-	    liveChat = new MyLiveChat("aaaaa", "aaaaa", "", this);
+	    liveChat = new MyLiveChat("aaaaa", "aaaaa", regid, this);
 		
 		result = (TextView)findViewById(R.id.result);
 		chat = (Button)findViewById(R.id.chatBtn);
