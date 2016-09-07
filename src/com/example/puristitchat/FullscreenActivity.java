@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -67,13 +69,27 @@ public class FullscreenActivity extends Activity {
 			int mShortAnimTime;
 
 			@Override
-			@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+			@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 			public void onVisibilityChange(boolean visible) {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 					// If the ViewPropertyAnimator API is available
 					// (Honeycomb MR2 and later), use it to animate the
 					// in-layout UI controls at the bottom of the
 					// screen.
+					Window window = getWindow();
+				    // Translucent status bar
+				    window.setFlags(
+				    	WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, 
+				    	WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+					
+					View decorView = getWindow().getDecorView();
+					decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+					                              | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+					                              | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+					                              | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+					                              | View.SYSTEM_UI_FLAG_FULLSCREEN
+					                              | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+					
 					if (mControlsHeight == 0) {
 						mControlsHeight = controlsView.getHeight();
 					}
