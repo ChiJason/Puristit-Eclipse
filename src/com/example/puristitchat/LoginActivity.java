@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,13 +26,19 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-//		String regid = FirebaseInstanceId.getInstance().getToken();
-//		Log.e("regid", regid);
-		
-		
-	    liveChat = new MyLiveChat("aaa", "aaa", "3eba0419-12cd-47bb-b497-e3d223b620d0", this);
+//		String regid = FcmPush.getToken();
+		String regid = FirebaseInstanceId.getInstance().getToken();
+	    
 		
 		result = (TextView)findViewById(R.id.result);
+		
+		if(regid==null){
+			Log.e("regid:", "Null");
+		}else {
+			result.setText("Ready to Chat");
+			liveChat = new MyLiveChat("abc", "abc", regid, this);
+		}
+		
 		chat = (Button)findViewById(R.id.chatBtn);
 		chat.setOnClickListener(new OnClickListener() {
 			
