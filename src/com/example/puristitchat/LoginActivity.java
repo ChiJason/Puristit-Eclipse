@@ -26,10 +26,9 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-//		String regid = FcmPush.getToken();
 		String regid = FirebaseInstanceId.getInstance().getToken();
+		Log.e("Regid:", regid);
 	    
-		
 		result = (TextView)findViewById(R.id.result);
 		
 		if(regid==null){
