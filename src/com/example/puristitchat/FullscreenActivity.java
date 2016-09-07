@@ -3,6 +3,7 @@ package com.example.puristitchat;
 import com.example.puristitchat.util.SystemUiHider;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -34,6 +35,8 @@ public class FullscreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
+		ActionBar actionBar = getActionBar();
+		actionBar.hide();
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -104,10 +107,6 @@ public class FullscreenActivity extends Activity {
 			}
 		});
 
-		// Upon interacting with UI controls, delay any scheduled hide()
-		// operations to prevent the jarring behavior of controls going away
-		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 	}
 	
 	WebViewClient mWebViewClient = new WebViewClient() {

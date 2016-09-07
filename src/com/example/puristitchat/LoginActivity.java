@@ -1,6 +1,7 @@
 package com.example.puristitchat;
 
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -24,9 +25,11 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		String regid = FirebaseInstanceId.getInstance().getToken();
+//		String regid = FirebaseInstanceId.getInstance().getToken();
+//		Log.e("regid", regid);
 		
-	    liveChat = new MyLiveChat("aaaaa", "aaaaa", regid, this);
+		
+	    liveChat = new MyLiveChat("aaa", "aaa", "3eba0419-12cd-47bb-b497-e3d223b620d0", this);
 		
 		result = (TextView)findViewById(R.id.result);
 		chat = (Button)findViewById(R.id.chatBtn);
@@ -37,7 +40,8 @@ public class LoginActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				Intent it = new Intent();
 				it.setClass(LoginActivity.this, FullscreenActivity.class);
-				it.putExtra("chatUrl", liveChat.getChatUrl());
+				it.putExtra("chat_url", liveChat.getChatUrl());
+				startActivity(it);
 			}
 		});
 	}
