@@ -1,5 +1,6 @@
 package com.example.puristitchat;
 
+import com.example.jac.livechat.LiveChat;
 import com.example.puristitchat.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -44,20 +45,26 @@ public class FullscreenActivity extends Activity {
 		final View contentView = findViewById(R.id.fullscreen_content);
 		
 		chatWin = (WebView) findViewById(R.id.chatWin);
+		Intent it = getIntent();
+		String regid = it.getStringExtra("regid");
 		
-		Intent intent = this.getIntent();
-        chatUrl = intent.getStringExtra("chat_url");
-
-        chatWin.setWebViewClient(mWebViewClient);
-        chatWin.setInitialScale(1);
-        chatWin.getSettings().setSupportZoom(true);
-        chatWin.getSettings().setBuiltInZoomControls(true);
-        chatWin.getSettings().setDisplayZoomControls(false);
-        chatWin.getSettings().setLoadWithOverviewMode(true);
-        chatWin.getSettings().setUseWideViewPort(true);
-        chatWin.getSettings().setJavaScriptEnabled(true);
-        chatWin.getSettings().setDomStorageEnabled(true);
-        chatWin.loadUrl(chatUrl);
+		LiveChat myLiveChat = new LiveChat("abc","abc", regid, chatWin, this) {
+			
+			@Override
+			protected void beforeRequest() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			protected void afterRequest() {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		myLiveChat.loadWebView();
+		
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
